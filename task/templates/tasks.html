@@ -1,0 +1,27 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+<main class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h1 class = "text-center display-3 py-5">{{title_name}}</h1>
+            <ul class = "list-group">
+                {% for task in tasks %}
+                    <a class = "list-group-item" href="{% url 'task_detail' task.id %}">
+                        <h1 class = "display-6">{{task.title}}</h1>
+                        <p><strong>Descripción:</strong> {{task.description}}</p>
+                        <p><strong>Usuario:</strong> {{task.user.username}}</p>
+                        {% if task.important %}
+                            <p><strong>Tipo: </strong>Tarea importante</p>
+                        {% else %}
+                            <p><strong>Tipo: </strong>Tarea no importante</p>
+                        {% endif %}
+                        <p>{{task.datecompleted|date:'M j Y:i'}}</p>
+                    </a>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    
+</main>   
+{% endblock %}
